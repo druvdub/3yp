@@ -3,8 +3,9 @@
 #################################################################################
 
 PROJECT_NAME = 3yp
-PYTHON_VERSION = 3.12
+PYTHON_VERSION = 3.12.7
 PYTHON_INTERPRETER = python
+VENV_DIR = .venv
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -14,6 +15,7 @@ PYTHON_INTERPRETER = python
 ## Install Python Dependencies
 .PHONY: requirements
 requirements:
+	@echo ">>> Installing Python Dependencies"
 	$(PYTHON_INTERPRETER) -m pip install -U pip
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 	
@@ -23,6 +25,7 @@ requirements:
 ## Delete all compiled Python files
 .PHONY: clean
 clean:
+	find . -type f -name "*.egg-info" -delete
 	find . -type f -name "*.py[co]" -delete
 	find . -type d -name "__pycache__" -delete
 
@@ -44,9 +47,23 @@ format:
 ## Set up python interpreter environment
 .PHONY: create_environment
 create_environment:
-	@bash -c "if [ ! -z `which virtualenvwrapper.sh` ]; then source `which virtualenvwrapper.sh`; mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); else mkvirtualenv.bat $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER); fi"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+	@if [ -d "$(VENV_DIR)" ]; then \
+		echo ">>> Deleting existing virtual environment"; \
+		rm -rf $(VENV_DIR); \
+	fi
+	@if command -v virtualenv > /dev/null; then \
+		echo ">>> Creating virtual environment using virtualenv"; \
+		virtualenv -p $(PYTHON_INTERPRETER) $(VENV_DIR); \
+	else \
+		echo ">>> virtualenv is not installed. Falling back to venv"; \
+		$(PYTHON_INTERPRETER) -m venv $(VENV_DIR); \
+	fi
+	@echo ""
+	@echo ">>> New virtual environment created. Activate with:"
+	@echo ">>>  source $(VENV_DIR)/bin/activate (MacOS/Linux)"
+	@echo ">>>  source $(VENV_DIR)\Scripts\activate (Windows)"
 	
+# TODO: Make makefile compatible with Windows native shell
 
 
 
