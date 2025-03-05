@@ -4,12 +4,13 @@ Here the model architectures used in the experiments are saved for reference.
 
 ## BasicSNN
 
-- Version: modelv1.pt (Same for binary and multi)
+- **Version: modelv1.pt (Same for binary and multi)**
 
-```python
-class BasicSNN(nn.Module):
-    def __init__(self, beta=0.5, num_steps=4, num_classes=2):
-        super(BasicSNN, self).__init__()
+  ```python
+
+  class BasicSNN(nn.Module):
+  def __init__(self, beta=0.5, num_steps=4, num_classes=2):
+  super(BasicSNN, self).__init__()
 
         self.num_steps = num_steps
         self.num_classes = num_classes
@@ -51,4 +52,5 @@ class BasicSNN(nn.Module):
             mem_rec.append(mem3)
 
         return torch.stack(spk_rec, dim=0), torch.stack(mem_rec, dim=0)
-```
+
+  ```

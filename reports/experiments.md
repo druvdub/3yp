@@ -32,7 +32,22 @@
     transforms.Normalize((0,), (1,))
 ])`
 
-### Experiment 2. modelv2.pt
+### Experiment 2. modelv2.pt ❌
+
+Viewing the impact of data augmentation on the model.
+
+- Used Transform: `transform = transforms.Compose([
+    transforms.Grayscale(num_output_channels=1),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomVerticalFlip(),
+    transforms.RandomRotation(20),
+    transforms.ToTensor(),
+    transforms.Normalize((0,), (1,))
+])`
+
+- Rest of the hyperparameters are the same as Experiment 1.
+
+> Outcome: Failed. Model performed worse than the previous model.
 
 ## BasicSNN (Multi)
 
@@ -65,6 +80,23 @@
 
 > ⚠️ **Issues**:
 > Since we are aggressively reducing the input size using a 4x4 kernel, and a stride of 4, we are losing a lot of information. This is causing the model to misclassify the `Infiltration` class as `Benign`. We need to either include padding or reduce the kernel and stride size.
+
+### Experiment 2. modelv2.pt ❌
+
+Since the model was misclassifying the `Infiltration` class as `Benign`, introducing data augmentation in training to see if the model can learn better.
+
+- Used Transform: `transform = transforms.Compose([
+    transforms.Grayscale(num_output_channels=1),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomVerticalFlip(),
+    transforms.RandomRotation(20),
+    transforms.ToTensor(),
+    transforms.Normalize((0,), (1,))
+])`
+
+- Rest of the hyperparameters are the same as Experiment 1.
+
+> Outcome: Failed. Model performed worse than the previous model.
 
 ## SNN (Paper)
 
