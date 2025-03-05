@@ -36,14 +36,15 @@
 
 Viewing the impact of data augmentation on the model.
 
-- Used Transform: `transform = transforms.Compose([
+- Used Transform: `train_transform = transforms.Compose([
     transforms.Grayscale(num_output_channels=1),
-    transforms.RandomHorizontalFlip(),
-    transforms.RandomVerticalFlip(),
-    transforms.RandomRotation(20),
+    transforms.RandomHorizontalFlip(),  # randomly flip images horizontally
+    transforms.RandomRotation(10),      # slight random rotation
+    transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # random translation
     transforms.ToTensor(),
     transforms.Normalize((0,), (1,))
-])`
+])
+`
 
 - Rest of the hyperparameters are the same as Experiment 1.
 
@@ -85,14 +86,15 @@ Viewing the impact of data augmentation on the model.
 
 Since the model was misclassifying the `Infiltration` class as `Benign`, introducing data augmentation in training to see if the model can learn better.
 
-- Used Transform: `transform = transforms.Compose([
+- Used Transform: `train_transform = transforms.Compose([
     transforms.Grayscale(num_output_channels=1),
-    transforms.RandomHorizontalFlip(),
-    transforms.RandomVerticalFlip(),
-    transforms.RandomRotation(20),
+    transforms.RandomHorizontalFlip(),  # randomly flip images horizontally
+    transforms.RandomRotation(10),      # slight random rotation
+    transforms.RandomAffine(degrees=0, translate=(0.1, 0.1)),  # random translation
     transforms.ToTensor(),
     transforms.Normalize((0,), (1,))
-])`
+])
+`
 
 - Rest of the hyperparameters are the same as Experiment 1.
 
