@@ -1,14 +1,4 @@
-# Model Architectures
-
-Here the model architectures used in the experiments are saved for reference.
-
-## BasicSNN
-
-- **Version: modelv1.pt (Same for binary and multi)**
-
-  ```python
-
-  class BasicSNN(nn.Module):
+class BasicSNN(nn.Module):
     def __init__(self, beta=0.5, num_steps=4, num_classes=2):
         super(BasicSNN, self).__init__()
 
@@ -35,22 +25,22 @@ Here the model architectures used in the experiments are saved for reference.
         mem_rec = []
 
         for step in range(self.num_steps):
-            cur1 = F.max_pool2d(self.conv1(x), 2)  # Remove F.relu
+            cur1 = F.max_pool2d(self.conv1(x), 2)
             spike1, mem1 = self.lif1(cur1, mem1)
 
-            cur2 = F.max_pool2d(self.conv2(spike1), 2)  # Remove F.relu
+            # print(spike1.shape)
+
+            cur2 = F.max_pool2d(self.conv2(spike1), 2)
             spike2, mem2 = self.lif2(cur2, mem2)
 
-            # print(spike2.shape)
+            # print(spike2)
             flatten = spike2.view(spike2.size(0), -1)
 
             # print(flatten.shape)
-            cur3 = self.fc1(flatten)  # Remove F.relu
+            cur3 = self.fc1(flatten)
             spike3, mem3 = self.lif3(cur3, mem3)
 
             spk_rec.append(spike3)
             mem_rec.append(mem3)
 
         return torch.stack(spk_rec, dim=0), torch.stack(mem_rec, dim=0)
-
-  ```
