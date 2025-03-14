@@ -6,6 +6,8 @@
 
 Exploratory project for NDR with SNN
 
+Dataset available on Huggingface: (https://huggingface.co/datasets/ddosdub/CSECICIDS2018)[https://huggingface.co/datasets/ddosdub/CSECICIDS2018]
+
 ## Project Organization
 
 ```
@@ -20,13 +22,14 @@ Exploratory project for NDR with SNN
 │
 ├── docs               <- A default mkdocs project; see www.mkdocs.org for details
 │
-├── models             <- Trained and serialized models, model predictions, or model summaries
+├── models             <- Model checkpoints
 │
 ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
 │                         the creator's initials, and a short `-` delimited description, e.g.
 │                         `1.0-jqp-initial-data-exploration`.
+│                      <- Notebooks are for exploration and experimentation: grouped by type of architecture and experiments
 │
-├── pyproject.toml     <- Project configuration file with package metadata for 
+├── pyproject.toml     <- Project configuration file with package metadata for
 │                         3yp and configuration for tools like black
 │
 ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
@@ -45,17 +48,8 @@ Exploratory project for NDR with SNN
     │
     ├── config.py               <- Store useful variables and configuration
     │
-    ├── dataset.py              <- Scripts to download or generate data
-    │
-    ├── features.py             <- Code to create features for modeling
-    │
-    ├── modeling                
-    │   ├── __init__.py 
-    │   ├── predict.py          <- Code to run model inference with trained models          
-    │   └── train.py            <- Code to train models
-    │
-    └── plots.py                <- Code to create visualizations
+    ├── models                  <- all available model classes
+        └── __init__.py
 ```
 
---------
-
+---
