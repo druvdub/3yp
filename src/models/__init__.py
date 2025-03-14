@@ -4,7 +4,8 @@ from .abstract_cnn import BinaryAbstractionCNN
 from .basicsnn import BasicSNN
 from .basicsnn_rate import BasicSNNRate
 from .cnn import BinaryCNN, BinaryCNN2, BinaryCNN3
-from .paper_snn import SNNClassifier
+from .paper_snn import SNNClassifier, TimeValEncoder, CustomLoss, ConvSpikingLayer
+from .binarized_snn import BinarizedSpikingNetwork
 
 
 
@@ -15,5 +16,6 @@ __all__ = [
     "BinaryCNN",
     "BinaryCNN2",
     "BinaryCNN3",
-    "SNNClassifier"
+    "SNNClassifier",
+    "BinarizedSpikingNetwork"
 ]
