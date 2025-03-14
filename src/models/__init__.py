@@ -1,11 +1,19 @@
-# IMPORTS
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import snntorch as snn
-from snntorch import surrogate
+# IMPORT MODELS FOR ACCESS
 
-
-# import classes
+from .abstract_cnn import BinaryAbstractionCNN
 from .basicsnn import BasicSNN
+from .basicsnn_rate import BasicSNNRate
+from .cnn import BinaryCNN, BinaryCNN2, BinaryCNN3
+from .paper_snn import SNNClassifier
 
+
+
+__all__ = [
+    "BinaryAbstractionCNN",
+    "BasicSNN",
+    "BasicSNNRate",
+    "BinaryCNN",
+    "BinaryCNN2",
+    "BinaryCNN3",
+    "SNNClassifier"
+]
